@@ -91,10 +91,10 @@ export default function LiveMap() {
     <div className="h-[calc(100vh-8rem)] bg-slate-800 rounded-xl overflow-hidden border border-slate-700 relative z-0">
       <MapContainer center={center} zoom={5} style={{ height: '100%', width: '100%' }}>
         {/* Dark mode friendly map tiles */}
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        />
+           <TileLayer
+     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+   />
         
         {hospitals.map(h => (
           <Marker key={h.hospitalId} position={[h.location.lat, h.location.lng]} icon={getHospitalIcon()}>
