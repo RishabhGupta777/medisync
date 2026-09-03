@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSocket } from '../context/SocketContext';
+import { API_URL } from '../config';
 import { CheckCircle, AlertTriangle } from 'lucide-react';
 
 export default function Dispatch() {
@@ -9,7 +10,7 @@ export default function Dispatch() {
 
   const fetchEmergencies = async () => {
     try {
-      const res = await axios.get('http://localhost:5005/api/emergencies');
+      const res = await axios.get(`${API_URL}/api/emergencies`);
       setEmergencies(res.data);
     } catch (err) {
       console.error(err);

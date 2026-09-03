@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Navigation, CarFront, AlertCircle, MapPin, Activity } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function DriverMode() {
   const [vehicles, setVehicles] = useState([]);
@@ -19,7 +20,7 @@ export default function DriverMode() {
 
   const fetchVehicles = async () => {
     try {
-      const res = await axios.get('http://localhost:5005/api/vehicles');
+      const res = await axios.get(`${API_URL}/api/vehicles`);
       setVehicles(res.data);
     } catch (err) {
       console.error(err);
@@ -34,7 +35,7 @@ export default function DriverMode() {
     
     setError('');
     try {
-      await axios.post(`http://localhost:5005/api/vehicles/${selectedVehicle}/claim`);
+      await axios.post(`${API_URL}/api/vehicles/${selectedVehicle}/claim`);
       startTracking();
     } catch (err) {
       setError(err.response?.data?.error || 'Failed to claim vehicle.');
@@ -55,7 +56,7 @@ export default function DriverMode() {
         setLocation({ lat: latitude, lng: longitude });
         
         try {
-          await axios.post(`http://localhost:5005/api/vehicles/${selectedVehicle}/location`, {
+          await axios.post(`${API_URL}/api/vehicles/${selectedVehicle}/location`, {
             lat: latitude,
             lng: longitude
           });

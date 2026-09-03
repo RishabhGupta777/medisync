@@ -4,6 +4,7 @@ import L from 'leaflet';
 import axios from 'axios';
 import { useSocket } from '../context/SocketContext';
 import 'leaflet/dist/leaflet.css';
+import { API_URL } from '../config';
 
 // Fix Leaflet default icon issues in React
 delete L.Icon.Default.prototype._getIconUrl;
@@ -50,9 +51,9 @@ export default function LiveMap() {
   const fetchData = async () => {
     try {
       const [vRes, hRes, eRes] = await Promise.all([
-        axios.get('http://localhost:5005/api/vehicles'),
-        axios.get('http://localhost:5005/api/hospitals'),
-        axios.get('http://localhost:5005/api/emergencies')
+        axios.get(`${API_URL}/api/vehicles`),
+        axios.get(`${API_URL}/api/hospitals`),
+        axios.get(`${API_URL}/api/emergencies`)
       ]);
       setVehicles(vRes.data);
       setHospitals(hRes.data);

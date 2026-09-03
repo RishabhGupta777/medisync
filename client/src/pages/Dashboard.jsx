@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Activity, Truck, AlertTriangle, Route, Clock, Heart, Building, Server } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useSocket } from '../context/SocketContext';
+import { API_URL } from '../config';
 
 const StatCard = ({ title, value, subtitle, icon: Icon, color }) => (
   <div className="bg-slate-800 border border-slate-700 rounded-xl p-5">
@@ -25,8 +26,8 @@ export default function Dashboard() {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get('http://localhost:5005/api/analytics/kpis');
-      const vehiclesRes = await axios.get('http://localhost:5005/api/vehicles');
+      const res = await axios.get(`${API_URL}/api/analytics/kpis`);
+      const vehiclesRes = await axios.get(`${API_URL}/api/vehicles`);
       setStats({ ...res.data, vehicles: vehiclesRes.data });
     } catch (err) {
       console.error(err);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSocket } from '../context/SocketContext';
+import { API_URL } from '../config';
 import { PlayCircle, AlertTriangle, CarFront, Activity } from 'lucide-react';
 
 export default function DemoMode() {
@@ -21,7 +22,7 @@ export default function DemoMode() {
 
   const fetchDecisions = async () => {
     try {
-      const res = await axios.get('http://localhost:5005/api/ai-decisions');
+      const res = await axios.get(`${API_URL}/api/ai-decisions`);
       setDecisions(res.data.slice(0, 10));
     } catch (err) {
       console.error(err);
@@ -31,7 +32,7 @@ export default function DemoMode() {
   const handleAction = async (action) => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:5005/api/demo/${action}`);
+      await axios.post(`${API_URL}/api/demo/${action}`);
     } catch (err) {
       alert(err.response?.data?.error || 'Action failed');
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSocket } from '../context/SocketContext';
 import { Settings, Battery, Thermometer, ShieldAlert, Zap, MapPin, User, Activity } from 'lucide-react';
+import { API_URL } from '../config';
 
 export default function Fleet() {
   const [vehicles, setVehicles] = useState([]);
@@ -10,7 +11,7 @@ export default function Fleet() {
 
   const fetchVehicles = async () => {
     try {
-      const res = await axios.get('http://localhost:5005/api/vehicles');
+      const res = await axios.get(`${API_URL}/api/vehicles`);
       setVehicles(res.data);
     } catch (err) {
       console.error(err);
